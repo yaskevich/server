@@ -8,6 +8,9 @@ my %hash  = ();
 my $max_len  = 0;
 
 for my $line(split(/\n/g, $info)) {
+	if ($line =~ m/\-\>/) { # drop active connections, usually WS
+		next;
+	}
 	my @line_cols = split(/\s+/g, $line);
 	my $port_info = $line_cols[8];
 	my $path_info = `ls -d -l /proc/$line_cols[1]/cwd`;
